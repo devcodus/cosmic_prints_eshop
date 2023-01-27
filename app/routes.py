@@ -11,6 +11,18 @@ def homepage():
     print(posts)
     return render_template('home.html', posts = posts)
     
+
+@app.route('/<item_name>', methods = ['GET', 'POST'])
+@login_required
+def addToCart(item_name):
+    addedItem = Product.query.filter_by(item = item_name).first()
+    print(addedItem)
+    
+    current_user.saveToCart(addedItem)
+    
+
+    return redirect(url_for('cart'))
+
 @app.route('/cart')
 @login_required
 def cart():

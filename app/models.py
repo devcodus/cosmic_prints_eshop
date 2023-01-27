@@ -40,6 +40,14 @@ class  User(db.Model, UserMixin):
         db.session.add(self)
         db.session.commit()
 
+    def saveToCart(self, save):
+        db.cart.add(save) # what does save mean?
+        db.session.commit()
+
+    def removeFromCart(self, user):
+        db.cart.delete(user)
+        db.session.commit()
+
 class  Product(db.Model):
     __tablename__= 'product'
     item_id = db.Column(db.Integer, primary_key=True)

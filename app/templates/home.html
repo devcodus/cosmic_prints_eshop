@@ -13,7 +13,7 @@
     <div class="container">
     <div class="row">
         <div class="card" style="width: 18rem;" >
-            <a class="text-dark text-decoration-none" href="#">
+            <a class="text-dark text-decoration-none" href="{{ url_for('addToCart', item_name = post.item) }}">
                 <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
                 <div class="card-body">
                 <h5 class="card-title">{{ post.item }} </h5>
