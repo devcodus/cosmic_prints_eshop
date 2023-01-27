@@ -8,7 +8,7 @@ db = SQLAlchemy()
 addproduct = db.Table(
     'addproduct',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
-    db.Column('product_id', db.String, db.ForeignKey('product.id'), nullable=False)
+    db.Column('product_id', db.Integer, db.ForeignKey('product.id'), nullable=False)
 )
 
 
@@ -21,9 +21,9 @@ class  User(db.Model, UserMixin):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
-    catch = db.relationship("Product",
+    cart = db.relationship("Product",
         secondary = addproduct,
-        backref=db.backref('items', lazy='dynamic'),
+        backref=db.backref('item', lazy='dynamic'),
         lazy='dynamic'
 
     )
