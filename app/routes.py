@@ -10,3 +10,15 @@ def homepage():
     posts = Product.query.all()
     print(posts)
     return render_template('home.html', posts = posts)
+    
+@app.route('/cart')
+@login_required
+def cart():
+    
+    message = 'This item has been added to your cart!'
+
+    # addedtocart = current_user
+    # print(addedtocart)
+
+    return render_template('cart.html', message = message)
+

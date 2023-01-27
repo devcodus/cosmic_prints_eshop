@@ -1,4 +1,5 @@
 .env
 __pycache__
 my_venv
+mac_venv
 requirements.txt
