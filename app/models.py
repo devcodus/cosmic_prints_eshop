@@ -4,6 +4,15 @@ from flask_login import UserMixin
 
 db = SQLAlchemy()
 
+
+addproduct = db.Table(
+    'addproduct',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
+    db.Column('product_id', db.String, db.ForeignKey('product.id'), nullable=False)
+)
+
+
+
 class  User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False, unique=True)
@@ -12,6 +21,13 @@ class  User(db.Model, UserMixin):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    catch = db.relationship("Product",
+        secondary = addproduct,
+        backref=db.backref('items', lazy='dynamic'),
+        lazy='dynamic'
+
+    )
+    
 
     def __init__(self, first_name, last_name, username, email, password):
         self.first_name = first_name
@@ -25,6 +41,7 @@ class  User(db.Model, UserMixin):
         db.session.commit()
 
 class  Product(db.Model):
+    __tablename__= 'product'
     id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String(50), nullable=False, unique=True)
     img_url = db.Column(db.String(1000), nullable=False, unique=True)
