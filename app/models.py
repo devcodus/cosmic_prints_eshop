@@ -8,7 +8,7 @@ db = SQLAlchemy()
 addproduct = db.Table(
     'addproduct',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
-    db.Column('product_id', db.Integer, db.ForeignKey('product.id'), nullable=False)
+    db.Column('item_name', db.String, db.ForeignKey('product.item'), nullable=False)
 )
 
 
@@ -23,7 +23,7 @@ class  User(db.Model, UserMixin):
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     cart = db.relationship("Product",
         secondary = addproduct,
-        backref=db.backref('item', lazy='dynamic'),
+        backref=db.backref('addtocart', lazy='dynamic'),
         lazy='dynamic'
 
     )
@@ -42,7 +42,7 @@ class  User(db.Model, UserMixin):
 
 class  Product(db.Model):
     __tablename__= 'product'
-    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String(50), nullable=False, unique=True)
     img_url = db.Column(db.String(1000), nullable=False, unique=True)
     price = db.Column(db.Integer, nullable=False, unique=True)
