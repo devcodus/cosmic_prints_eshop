@@ -5,12 +5,11 @@ from flask_login import UserMixin
 db = SQLAlchemy()
 
 
-addproduct = db.Table(
-    'addproduct',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
-    db.Column('item_name', db.String, db.ForeignKey('product.item'), nullable=False)
-)
 
+addproduct = db.Table('cart',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('product_id', db.Integer, db.ForeignKey('product.item_id'), primary_key=True)
+)
 
 
 class  User(db.Model, UserMixin):
@@ -53,7 +52,7 @@ class  User(db.Model, UserMixin):
 class  Product(db.Model):
     __tablename__= 'product'
     item_id = db.Column(db.Integer, primary_key=True)
-    item = db.Column(db.String(50), nullable=False, unique=True)
+    item_name = db.Column(db.String(50), nullable=False, unique=True)
     img_url = db.Column(db.String(1000), nullable=False, unique=True)
     price = db.Column(db.Integer, nullable=False, unique=True)
 
