@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, flash, url_for, redirect
-from .models import Product
+from .models import Product, Cart
 from flask_login import current_user, login_required
 
 
@@ -17,8 +17,10 @@ def homepage():
 def addToCart(item_name):
     addedItem = Product.query.filter_by(item = item_name).first()
     print(addedItem)
-    # if addedItem:
-    current_user.saveToCart(addedItem)
+    # current_user.saveToDB(addedItem)
+    # addedItem.cart.saveToDB()
+    Cart.saveToDB(addedItem)
+        
 
 
     return redirect(url_for('cart'))
