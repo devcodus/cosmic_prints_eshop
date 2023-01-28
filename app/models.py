@@ -24,6 +24,7 @@ class  User(db.Model, UserMixin):
     cart = db.relationship("Product",
         secondary = addproduct,
         backref=db.backref('addtocart', lazy='dynamic'),
+        
         lazy='dynamic'
 
     )
@@ -41,11 +42,12 @@ class  User(db.Model, UserMixin):
         db.session.commit()
 
     def saveToCart(self, save):
-        db.cart.add(save) # what does save mean?
+        self.cart.append(save) # (switched add for append and db for self)
         db.session.commit()
 
-    def removeFromCart(self, user):
-        db.cart.delete(user)
+    def deleteFromCart(self, user):
+        # self.cart.delete(user)
+        db.session.delete(user)
         db.session.commit()
 
 class  Product(db.Model):
