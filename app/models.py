@@ -22,8 +22,6 @@ class  User(db.Model, UserMixin):
     password = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     cart = db.relationship("Cart", backref='useritem', lazy=True)
-  
-    
 
     def __init__(self, first_name, last_name, username, email, password):
         self.first_name = first_name
@@ -40,7 +38,7 @@ class  User(db.Model, UserMixin):
 
 class  Product(db.Model):
     __tablename__= 'product'
-    item_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     item = db.Column(db.String(50), nullable=False, unique=True)
     img_url = db.Column(db.String(1000), nullable=False, unique=True)
     price = db.Column(db.Integer, nullable=False, unique=True)
@@ -63,7 +61,7 @@ class Cart(db.Model):
     __tablename__='cart'
     cart_id = db.Column(db.Integer, primary_key=True)
     user_id  = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    item_name = db.Column(db.String, db.ForeignKey('product.item'), nullable=False)
+    item_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
 
     def __init__(self, user_id,item_name):
         self.user_id = user_id
@@ -71,7 +69,7 @@ class Cart(db.Model):
       
   
 
-    def saveToDB(self):
+    def saveToCart(self):
         db.session.add(self)
         db.session.commit()
 

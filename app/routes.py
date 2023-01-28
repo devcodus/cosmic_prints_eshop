@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, flash, url_for, redirect
-from .models import Product, Cart
+from .models import Product, Cart,User
 from flask_login import current_user, login_required
 
 
@@ -17,13 +17,16 @@ def homepage():
 def addToCart(item_name):
     addedItem = Product.query.filter_by(item = item_name).first()
     print(addedItem)
+    
+    # current_user.cart.saveToCart(addedItem)
     # current_user.saveToDB(addedItem)
-    # addedItem.cart.saveToDB()
-    Cart.saveToDB(addedItem)
+    # addedItem.cart.saveToCart()
+    cart.saveToDB(addedItem)
         
-
-
     return redirect(url_for('cart'))
+
+
+
 
 @app.route('/cart', methods = ['GET', 'POST'])
 @login_required
@@ -36,6 +39,8 @@ def cart():
     
 
     return render_template('cart.html', usercart=usercart, message = message)
+
+
 
 @app.route('/cart/<string:item_name>', methods=['GET', 'POST'])
 @login_required
