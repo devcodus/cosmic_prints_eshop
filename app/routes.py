@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, flash, url_for, redirect
-from .models import Product, Cart,User
+from .models import Product, Cart
 from flask_login import current_user, login_required
 
 
@@ -12,41 +12,34 @@ def homepage():
     return render_template('home.html', posts = posts)
     
 
-@app.route('/<item_name>', methods = ['GET', 'POST'])
+@app.route('/<int:item_id>', methods = ['GET', 'POST'])
 @login_required
-def addToCart(item_name):
-    addedItem = Product.query.filter_by(item = item_name).first()
+def addToCart(item_id):
+    addedItem = Product.query.filter_by(id = item_id).first()
     print(addedItem)
     
-    # current_user.cart.saveToCart(addedItem)
-    # current_user.saveToDB(addedItem)
-    # addedItem.cart.saveToCart()
-    cart.saveToDB(addedItem)
-        
+    
+
+
     return redirect(url_for('cart'))
-
-
-
 
 @app.route('/cart', methods = ['GET', 'POST'])
 @login_required
 def cart():
     
-    usercart= current_user.cart
+    # usercart= current_user.cart
     message = 'This item has been added to your cart!'
     
     
     
 
-    return render_template('cart.html', usercart=usercart, message = message)
+    return render_template('cart.html', message = message)
 
-
-
-@app.route('/cart/<string:item_name>', methods=['GET', 'POST'])
+@app.route('/cart/<int:item_id>', methods=['GET', 'POST'])
 @login_required
-def removeFromCart(item_name):
-    print(item_name)
-    deletedcart = Product.query.filter_by(item=item_name).first()
+def removeFromCart(item_id):
+    print(item_id)
+    deletedcart = Cart.query.filter_by(item=item_id).first()
     # deletedcart = current_user.cart
     print(deletedcart)
     if deletedcart:
