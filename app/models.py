@@ -40,8 +40,8 @@ class  User(db.Model, UserMixin):
         db.session.add(self)
         db.session.commit()
 
-    def saveToCart(self, save):
-        db.cart.add(save) # what does save mean?
+    def saveToCart(self):
+        self.cart.add() # what does save mean?
         db.session.commit()
 
     def removeFromCart(self, user):
