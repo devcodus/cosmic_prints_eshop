@@ -5,7 +5,7 @@ from .models import Product
 from flask_login import current_user, login_required
 
 
-@app.route('/')
+@app.route('/populate')
 @login_required
 def populate():
 
@@ -38,13 +38,26 @@ def populate():
     print(posts)
     return render_template('home.html', posts = posts)
 
+@app.route('/')
+@login_required
+def homePage():
+    posts = Product.query.all()
+    print(posts)
+    return render_template('home.html', posts = posts)
+
+
 @app.route('/all_products')
-def displayProducts():
+def displayAllProducts():
     
     posts = Product.query.all()
     print(posts)
     return render_template('home.html', posts = posts)
 
+@app.route('/single-product/<product>')
+def displayProduct(product):
+    single_product = Product.query.filter_by(item_id=product).first
+    print(single_product)
+    return render_template('single_product.html', single_product=single_product)
 
     
 
@@ -64,13 +77,12 @@ def addToCart(item_name):
 def cart():
     
     usercart= current_user.cart
-    message = 'This item has been added to your cart!'
 
     grand_total = 0
     for item in usercart:
         grand_total += item.price
 
-    return render_template('cart.html', usercart=usercart, message = message, grand_total=grand_total)
+    return render_template('cart.html', usercart=usercart, grand_total=grand_total)
 
 @app.route('/cart/<string:item_name>', methods=['GET', 'POST'])
 @login_required
