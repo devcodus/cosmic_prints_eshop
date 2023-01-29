@@ -39,7 +39,7 @@ def cart():
 @login_required
 def removeFromCart(item_name):
     print(item_name)
-    deletedcart = Product.query.filter_by(item=item_name).first()
+    deletedcart = Product.query.filter_by(item_name=item_name).first()
     # deletedcart = current_user.cart
     print(deletedcart)
     if deletedcart:
@@ -47,3 +47,4 @@ def removeFromCart(item_name):
 
     return redirect(url_for('cart'))
     # return render_template('cart.html')
+
