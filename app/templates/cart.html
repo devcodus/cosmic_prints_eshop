@@ -32,6 +32,10 @@
     </div>
     {% endfor %}
     <h3>Grand Total:${{ grand_total }}</h3>
+    <h1>OR</h1>
+    <a type="button" class="btn btn-danger"
+                href="{{ url_for('removeAllFromCart') }}"  action="">Delete All</a>
+
 </div>
 
 

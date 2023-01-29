@@ -44,9 +44,9 @@ class  User(db.Model, UserMixin):
         self.cart.add(save) # what does save mean?
         db.session.commit()
 
-    def deleteFromCart(self, user):
+    def deleteFromCart(self, user): ## why is this method in the user class?
         # self.cart.delete(user)
-        db.session.delete(user)
+        db.session.delete(user) ## should we add a deleteEntireCart method? (is it better to delete via the models or via the route?) (if models, we could use a from user TRUNCATE TABLE method...)
         db.session.commit()
 
 class  Product(db.Model):
