@@ -65,11 +65,12 @@ def cart():
     
     usercart= current_user.cart
     message = 'This item has been added to your cart!'
-    
-    
-    
 
-    return render_template('cart.html', usercart=usercart, message = message)
+    grand_total = 0
+    for item in usercart:
+        grand_total += item.price
+
+    return render_template('cart.html', usercart=usercart, message = message, grand_total=grand_total)
 
 @app.route('/cart/<string:item_name>', methods=['GET', 'POST'])
 @login_required

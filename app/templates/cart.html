@@ -7,11 +7,12 @@
 
 {{message}}
 
-{% for post in usercart %}
-
 <div class="container">
+{% for post in usercart %}
+<!-- {% print(usercart) %} -->
+
     <div class="row">
-        <div class="card" style="width: 18rem;">
+        <div class="cart card" style="width: 18rem;">
 
            
             
@@ -29,9 +30,9 @@
             
         </div>
     </div>
+    {% endfor %}
+    <h3>Grand Total:${{ grand_total }}</h3>
 </div>
-{% endfor %}
 
-<h6>Grand Total:</h6>
 
 {% endblock %}
