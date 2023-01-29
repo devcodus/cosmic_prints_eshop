@@ -15,7 +15,7 @@ def homepage():
 @app.route('/<item_name>', methods = ['GET', 'POST'])
 @login_required
 def addToCart(item_name):
-    addedItem = Product.query.filter_by(item = item_name).first()
+    addedItem = Product.query.filter_by(item_name = item_name).first()
     print(addedItem)
     # if addedItem:
     current_user.saveToCart(addedItem)

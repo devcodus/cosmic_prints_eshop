@@ -60,7 +60,7 @@ class  Product(db.Model):
 
 
     def __init__(self, item,img_url,price):
-        self.item = item
+        self.item_name = item
         self.img_url = img_url
         self.price = price
   

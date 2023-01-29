@@ -13,10 +13,10 @@
     <div class="container">
     <div class="row">
         <div class="card" style="width: 18rem;" >
-            <a class="text-dark text-decoration-none" href="{{ url_for('addToCart', item_name = post.item) }}">
+            <a class="text-dark text-decoration-none" href="{{ url_for('addToCart', item_name = post.item_name) }}">
                 <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
                 <div class="card-body">
-                <h5 class="card-title">{{ post.item }} </h5>
+                <h5 class="card-title">{{ post.item_name }} </h5>
                 <p class="card-text">${{ post.price }}.00</p>
                 </div>
             </a>
