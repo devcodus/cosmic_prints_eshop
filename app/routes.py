@@ -90,13 +90,14 @@ def removeFromCart(item_name):
 @login_required
 def removeAllFromCart():
     
-    deletedcart = Product.query.filter_by(item_name=item_name).all() 
+    # deletedcart = Product.query.filter_by(item_name=item_name).all() 
     ## what does each argument mean here? which is which?
 
+    current_user.deleteAllFromCart()
 
     # deletedcart = current_user.cart
-    print(deletedcart)
-    if deletedcart:
-        current_user.deleteFromCart(deletedcart) ## should we add a deleteAll function to the model? or do a for loop to retrieve all the items? how to pass multiple parameters at once without knowing exactly how many one will grab? (depends on how many items in cart)
+    # print(deletedcart)
+    # if deletedcart:
+    #     current_user.deleteFromCart(deletedcart) ## should we add a deleteAll function to the model? or do a for loop to retrieve all the items? how to pass multiple parameters at once without knowing exactly how many one will grab? (depends on how many items in cart)
 
     return redirect(url_for('cart'))
