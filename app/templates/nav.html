@@ -7,7 +7,7 @@
           
               {% if current_user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ url_for('displayProducts')}}">All Products</a>
+                <a class="nav-link active" aria-current="page" href="{{ url_for('displayAllProducts')}}">All Products</a>
               </li>
               <li>
                 <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
