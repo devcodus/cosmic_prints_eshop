@@ -2,50 +2,35 @@
 {% block content %}
 
 <div class="container col-3">
-    <div class="row justify-content-center"> 
-        <h1> Cosmic Prints </h1>
+    <div class="row justify-content-center">
+        <h1 id="title"> Cosmic Prints </h1>
         <br>
-      
+
     </div>
 </div>
-<div class="row">
+<div id="sale_post" class="row">
     {% for post in posts %}
-<<<<<<< HEAD
-=======
-    <div class="container">
-    <div class="row">
-        <div class="card" style="width: 18rem;" >
-            <form method="POST">
-            <a class="text-dark text-decoration-none" href="{{ url_for('addToCart', item_id = post.id) }}">
-                <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
-                <div class="card-body">
-                <h5 class="card-title">{{ post.item }} </h5>
+    <div  id="ind_cards" class="card" style="width: 18rem;">
+
+        <a class="text-dark text-decoration-none" href="{{url_for('displayProduct', product = post)}}">
+            <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ post.item_name }} </h5>
                 <p class="card-text">${{ post.price }}.00</p>
-                </div>
-            </a>
-            </form>
-        </div>
-    </div>
-    </div>
-    {% endfor %}
->>>>>>> e54b90dcb8be0ccd530e5d8be41f25b160fb7f71
 
-            <div class="card" style="width: 18rem;" >
-                
-                <a class="text-dark text-decoration-none" href="{{url_for('displayProduct', product = post)}}">
-                    <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.item_name }} </h5>
-                        <p class="card-text">${{ post.price }}.00</p>
-                        
-                        <a class="btn btn-warning" action="{{ url_for('addToCart', item_name = post.item_name) }}" href="{{ url_for('addToCart', item_name = post.item_name) }}">Add to Cart</a>
+                <a class="btn btn-warning" action="{{ url_for('addToCart', item_name = post.item_name) }}"
+                    href="{{ url_for('addToCart', item_name = post.item_name) }}">Add to Cart</a>
 
-                    </div>
-                </a>
-                
             </div>
+        </a>
+
+    </div>
 
     {% endfor %}
+    
 </div>
+<br>
+<br>
+<br>
 {% endblock %}

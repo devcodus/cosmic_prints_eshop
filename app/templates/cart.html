@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Shopping Cart</h1>
-
-<h5>Your Items:</h5>
 
 
-<div class="container">
-{% for post in usercart %}
-<!-- {% print(usercart) %} -->
+<div class="container col-3">
+    <h1 id="title">Shopping Cart</h1>
+
+    <h5 id="title">Your Items:</h5>
+
+    {% for post in usercart %}
+    <!-- {% print(usercart) %} -->
 
     <div class="row">
-        <div class="cart card" style="width: 18rem;">
+        <div class="column">
+            <div class="cart card" style="width: 18rem;">
 
-           
-            
+
+
                 <a class="text-dark text-decoration-none" href="#">
                     <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
                     <div class="card-body">
@@ -22,18 +24,23 @@
                         <p class="card-text">${{ post.price }}.00</p>
                     </div>
                 </a>
-           
-            <a type="button" class="btn btn-danger"
-                href="{{ url_for('removeFromCart', item_name = post.item_name) }}"  action="">Delete</a>
 
-            
+                <a type="button" class="btn btn-danger"
+                    href="{{ url_for('removeFromCart', item_name = post.item_name) }}" action="">Delete</a>
+
+
+            </div>
         </div>
     </div>
     {% endfor %}
-    <h3>Grand Total:${{ grand_total }}</h3>
-    <h1>OR</h1>
-    <a type="button" class="btn btn-danger"
-                href="{{ url_for('removeAllFromCart') }}"  action="">Delete All</a>
+    <h3 id="title">Grand Total:${{ grand_total }}</h3>
+    <a type="button" class="btn btn-success" href="#" action="">Purchase</a>
+
+    <h1 id="title">OR</h1> 
+    <a type="button" class="btn btn-danger" href="{{ url_for('removeAllFromCart') }}" action="">Delete All</a>
+    <br>
+    <br>
+    <br>
 
 </div>
 
